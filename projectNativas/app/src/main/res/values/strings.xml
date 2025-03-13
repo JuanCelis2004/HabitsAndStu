@@ -1,0 +1,6 @@
+<resources>
+    <string name="app_name">projectNativas</string>
+    <string name="ent">Entrar</string>
+    <string name="reg">Registrar</string>
+    <string name="back_arrow_description">Botón de regreso</string>
+</resources>
