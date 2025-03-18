@@ -35,7 +35,7 @@
                     android:layout_height="wrap_content"
                     android:text="Lista de Hábitos"
                     android:textColor="@android:color/black"
-                    android:textSize="24sp"
+                    android:textSize="28sp"
                     android:textStyle="bold"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -45,14 +45,17 @@
                 <!-- Menú hamburguesa más grande -->
                 <ImageButton
                     android:id="@+id/btn_menu"
-                    android:layout_width="56dp"
-                    android:layout_height="56dp"
+                    android:layout_width="64dp"
+                    android:layout_height="64dp"
                     android:background="?attr/selectableItemBackgroundBorderless"
-                    android:padding="16dp"
+                    android:padding="10dp"
+                    android:contentDescription="Menu"
+                    android:scaleType="centerInside"
                     android:src="@drawable/ic_menu"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:tint="@color/black" />
             </androidx.constraintlayout.widget.ConstraintLayout>
 
         </androidx.appcompat.widget.Toolbar>
@@ -89,7 +92,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="Hacer ejercicio"
-                            android:textSize="18sp"
+                            android:textSize="22sp"
                             android:textStyle="bold"
                             android:textColor="@android:color/black"/>
 
@@ -98,31 +101,29 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="Diario"
-                            android:textSize="14sp"
+                            android:textSize="20sp"
                             android:textColor="@android:color/darker_gray"/>
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="1:00 PM"
-                            android:textSize="14sp"
+                            android:textSize="20sp"
                             android:textColor="@android:color/darker_gray"/>
                     </LinearLayout>
 
                     <!-- Selector de estado a la derecha -->
-                    <TextView
-                        android:id="@+id/tv_status"
+                    <Spinner
+                        android:id="@+id/spinner_status"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Sin completar ▼"
-                        android:textSize="14sp"
-                        android:textColor="@android:color/white"
-                        android:background="@drawable/status_selector"
-                        android:paddingVertical="8dp"
+                        android:minHeight="50dp"
+                        android:minWidth="150dp"
+                        android:textSize="16sp"
+                        android:background="@drawable/set_spinn_bg_red"
+                        android:paddingVertical="12dp"
                         android:paddingHorizontal="16dp"
                         android:gravity="center"
-                        android:clickable="true"
-                        android:focusable="true"
                         android:elevation="4dp"
                         android:layout_gravity="center_vertical"/>
                 </LinearLayout>
@@ -148,18 +149,13 @@
             android:id="@+id/fab_add"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            app:maxImageSize="35dp"
             android:src="@drawable/ic_add"
+            android:contentDescription="Agregar nuevo hábito"
             app:backgroundTint="@color/nav"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             android:layout_margin="30dp"/>
     </androidx.constraintlayout.widget.ConstraintLayout>
-
-    <!-- Menú lateral de navegación -->
-    <com.google.android.material.navigation.NavigationView
-        android:id="@+id/navigationView"
-        android:layout_width="wrap_content"
-        android:layout_height="match_parent"
-        android:layout_gravity="start" />
 
 </androidx.drawerlayout.widget.DrawerLayout>

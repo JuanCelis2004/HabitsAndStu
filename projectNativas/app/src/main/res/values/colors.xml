@@ -2,7 +2,9 @@
 <resources>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
-    <color name="nav">#77c8ec</color>
-    <color name="red">#e61111</color>
-    <color name="green">#1cdc0c</color>
+    <color name="nav">#94CAF4</color>
+    <color name="red">#F76B45</color>
+    <color name="green">#4FAD26</color>
+    <color name="btn">#8BE464</color>
+    <color name="bg_form">#E5E7E9</color>
 </resources>

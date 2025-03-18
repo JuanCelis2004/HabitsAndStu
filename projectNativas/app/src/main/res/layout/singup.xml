@@ -43,7 +43,7 @@
                 android:layout_height="wrap_content"
                 android:text="REGISTRAR"
                 android:textColor="@android:color/black"
-                android:textSize="24sp"
+                android:textSize="26sp"
                 android:textStyle="bold"
                 android:gravity="center" />
             <View
@@ -60,7 +60,7 @@
             android:layout_marginBottom="5dp"
             android:text="Nombre"
             android:textColor="@android:color/black"
-            android:textSize="16sp" />
+            android:textSize="20sp" />
 
         <EditText
             android:layout_width="match_parent"
@@ -76,7 +76,7 @@
             android:layout_marginBottom="5dp"
             android:text="Apellido"
             android:textColor="@android:color/black"
-            android:textSize="16sp" />
+            android:textSize="20sp" />
 
         <EditText
             android:layout_width="match_parent"
@@ -93,7 +93,7 @@
             android:layout_marginBottom="5dp"
             android:text="Correo"
             android:textColor="@android:color/black"
-            android:textSize="16sp" />
+            android:textSize="20sp" />
 
         <EditText
             android:layout_width="match_parent"
@@ -110,7 +110,7 @@
             android:layout_marginBottom="5dp"
             android:text="Contraseña"
             android:textColor="@android:color/black"
-            android:textSize="16sp" />
+            android:textSize="20sp" />
 
         <EditText
             android:layout_width="match_parent"
@@ -127,8 +127,8 @@
             android:background="@drawable/button_bg"
             android:paddingHorizontal="30dp"
             android:text="@string/reg"
-            android:textColor="@android:color/white"
-            android:textSize="16sp" />
+            android:textColor="@android:color/black"
+            android:textSize="20sp" />
 
     </LinearLayout>
 </LinearLayout>
