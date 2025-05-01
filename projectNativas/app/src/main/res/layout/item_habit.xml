@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:background="@android:color/white"
+    android:padding="8dp"
+    android:layout_marginBottom="8dp"
+    android:elevation="2dp">
+
+    <!-- Contenedor horizontal principal -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center_vertical">
+
+        <!-- Imagen a la izquierda -->
+        <ImageView
+            android:id="@+id/image_habit"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:layout_marginEnd="12dp"
+            android:scaleType="centerCrop"
+            android:padding="4dp"/>
+
+        <!-- Contenedor del texto (nombre, frecuencia, hora) -->
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <!-- Nombre del hábito -->
+            <TextView
+                android:id="@+id/text_habit_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Hacer ejercicio"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                android:textColor="@android:color/black"/>
+
+            <!-- Frecuencia -->
+            <TextView
+                android:id="@+id/text_habit_frequency"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Diario"
+                android:textSize="16sp"
+                android:textColor="@android:color/darker_gray"/>
+
+            <!-- Hora -->
+            <TextView
+                android:id="@+id/text_habit_time"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="1:00 PM"
+                android:textSize="16sp"
+                android:textColor="@android:color/darker_gray"/>
+        </LinearLayout>
+
+        <!-- Selector de estado (Spinner) a la derecha -->
+        <Spinner
+            android:id="@+id/spinner_status"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:minHeight="50dp"
+            android:minWidth="120dp"
+            android:textSize="14sp"
+            android:background="@drawable/set_spinn_bg_red"
+            android:paddingVertical="8dp"
+            android:paddingHorizontal="12dp"
+            android:gravity="center"
+            android:layout_gravity="center_vertical" />
+    </LinearLayout>
+
+    <!-- Línea negra separadora -->
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:background="@android:color/black"
+        android:layout_marginTop="8dp"/>
+</LinearLayout>

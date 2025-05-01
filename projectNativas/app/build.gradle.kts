@@ -34,6 +34,9 @@ android {
 dependencies {
 
     implementation("com.github.PhilJay:MPAndroidChart:3.1.0")
+    implementation ("com.squareup.picasso:picasso:2.71828")
+    implementation ("com.android.volley:volley:1.2.1")
+    implementation ("androidx.swiperefreshlayout:swiperefreshlayout:1.1.0")
     implementation(libs.appcompat)
     implementation(libs.material)
     implementation(libs.activity)

@@ -1,5 +1,5 @@
-<?xml version="1.0" encoding="utf-8"?>
-<androidx.drawerlayout.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.drawerlayout.widget.DrawerLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/drawerLayout"
@@ -7,7 +7,6 @@
     android:layout_height="match_parent"
     tools:openDrawer="start">
 
-    <!-- Contenido principal -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -18,7 +17,7 @@
         <androidx.appcompat.widget.Toolbar
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
-            android:layout_height="?attr/actionBarSize"
+            android:layout_height="120dp"
             android:background="@color/nav"
             android:elevation="4dp"
             android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
@@ -28,21 +27,19 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
 
-                <!-- Título centrado con tamaño más grande -->
                 <TextView
                     android:id="@+id/toolbar_title"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Lista de Hábitos"
                     android:textColor="@android:color/black"
-                    android:textSize="28sp"
+                    android:textSize="35sp"
                     android:textStyle="bold"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintBottom_toBottomOf="parent"/>
+                    app:layout_constraintBottom_toBottomOf="parent" />
 
-                <!-- Menú hamburguesa más grande -->
                 <ImageButton
                     android:id="@+id/btn_menu"
                     android:layout_width="64dp"
@@ -60,90 +57,27 @@
 
         </androidx.appcompat.widget.Toolbar>
 
-        <!-- Contenedor principal para la lista de hábitos -->
-        <ScrollView
+        <!-- ⬇️ NUEVO: Contenedor de lista con SwipeRefreshLayout -->
+        <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+            android:id="@+id/swipeRefreshLayout"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:padding="16dp">
+            android:layout_height="0dp"
+            android:layout_weight="1">
 
-            <LinearLayout
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recyclerHabits"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
+                android:layout_height="match_parent"
                 android:padding="16dp"
-                android:background="@android:color/white"
-                android:layout_marginBottom="8dp">
+                android:clipToPadding="false" />
+        </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
-                <!-- Contenedor principal -->
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal">
-
-                    <!-- Contenedor del texto a la izquierda -->
-                    <LinearLayout
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:orientation="vertical">
-
-                        <!-- Nombre del hábito alineado a la izquierda -->
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="Hacer ejercicio"
-                            android:textSize="22sp"
-                            android:textStyle="bold"
-                            android:textColor="@android:color/black"/>
-
-                        <!-- Hora alineada a la izquierda -->
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="Diario"
-                            android:textSize="20sp"
-                            android:textColor="@android:color/darker_gray"/>
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="1:00 PM"
-                            android:textSize="20sp"
-                            android:textColor="@android:color/darker_gray"/>
-                    </LinearLayout>
-
-                    <!-- Selector de estado a la derecha -->
-                    <Spinner
-                        android:id="@+id/spinner_status"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:minHeight="50dp"
-                        android:minWidth="150dp"
-                        android:textSize="16sp"
-                        android:background="@drawable/set_spinn_bg_red"
-                        android:paddingVertical="12dp"
-                        android:paddingHorizontal="16dp"
-                        android:gravity="center"
-                        android:elevation="4dp"
-                        android:layout_gravity="center_vertical"/>
-                </LinearLayout>
-
-                <!-- Línea negra separadora -->
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="2dp"
-                    android:background="@android:color/black"
-                    android:layout_marginTop="8dp"/>
-            </LinearLayout>
-
-        </ScrollView>
     </LinearLayout>
 
+    <!-- FAB Botón -->
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
-
-        <!-- Contenido principal -->
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:id="@+id/fab_add"
@@ -155,7 +89,7 @@
             app:backgroundTint="@color/nav"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            android:layout_margin="30dp"/>
+            android:layout_margin="30dp" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </androidx.drawerlayout.widget.DrawerLayout>
