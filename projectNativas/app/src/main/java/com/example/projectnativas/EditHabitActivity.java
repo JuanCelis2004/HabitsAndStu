@@ -96,10 +96,8 @@ public class EditHabitActivity extends AppCompatActivity {
                     response -> {
                         if (response.equals("OK")) {
                             Toast.makeText(this, "Hábito actualizado correctamente", Toast.LENGTH_SHORT).show();
-                            Intent volver = new Intent(this, Habits.class);
-                            volver.putExtra("userId", getIntent().getIntExtra("userId", -1));
-                            startActivity(volver);
-                            finish();
+                            setResult(RESULT_OK);
+                            finish();  // Solo cierras esta actividad, no creas otra
                         } else {
                             Toast.makeText(this, "Error del servidor: " + response, Toast.LENGTH_LONG).show();
                         }

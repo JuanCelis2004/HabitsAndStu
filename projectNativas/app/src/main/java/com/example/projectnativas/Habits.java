@@ -2,11 +2,19 @@ package com.example.projectnativas;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
+import android.widget.FrameLayout;
+import android.widget.ImageButton;
+import android.widget.LinearLayout;
+import android.widget.Toast;
+
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.view.GravityCompat;
+import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-import androidx.swiperefreshlayout.widget.SwipeRefreshLayout; // IMPORTANTE
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -15,6 +23,8 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.android.material.navigation.NavigationView;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -31,12 +41,57 @@ public class Habits extends AppCompatActivity {
     private SwipeRefreshLayout swipeRefreshLayout;
     private int userId;
 
+    DrawerLayout drawerLayout;
+    NavigationView navigationView;
+    ImageButton btnMenu;
+
+    LinearLayout contentMain;
+    FrameLayout fragmentContainer;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.habits);
 
+        drawerLayout = findViewById(R.id.drawerLayout);
+        navigationView = findViewById(R.id.nav_view);
+        btnMenu = findViewById(R.id.btn_menu);
+
+        // Abrir drawer al tocar el ícono del menú
+        btnMenu.setOnClickListener(v -> {
+            Log.d("MENU_NAV", "Seleccionaste Estadísticas");
+            drawerLayout.openDrawer(GravityCompat.START);
+        });
+
+        // Manejar clics en los ítems del menú lateral
+        navigationView.setNavigationItemSelectedListener(item -> {
+            int id = item.getItemId();
+
+            drawerLayout.closeDrawer(GravityCompat.START);
+
+            drawerLayout.postDelayed(() -> {
+                if (id == R.id.nav_estadisticas) {
+                    Intent intent = new Intent(Habits.this, Statistics.class);
+                    intent.putExtra("userId", userId);
+                    startActivity(intent);
+                } else if (id == R.id.nav_configuracion) {
+                    Intent intent = new Intent(Habits.this, Settings.class);
+                    intent.putExtra("userId", userId); // ✅ PASAR userId
+                    startActivity(intent);                } else if (id == R.id.nav_inicio) {
+                    Intent intent = new Intent(Habits.this, Habits.class);
+                    intent.putExtra("userId", userId);  // <--- PASAR userId AQUÍ
+                    startActivity(intent);
+                }
+            }, 250);
+
+            return true;
+        });
+
+
+
+
         userId = getIntent().getIntExtra("userId", -1);
+        Log.d("USER_ID", "ID del usuario recibido: " + userId);
 
         recyclerView = findViewById(R.id.recyclerHabits);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
@@ -57,7 +112,6 @@ public class Habits extends AppCompatActivity {
             }
         });
 
-        // Listener para SwipeRefresh
         swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
@@ -79,10 +133,12 @@ public class Habits extends AppCompatActivity {
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
-                        swipeRefreshLayout.setRefreshing(false); // Ocultar animación de carga
+                        swipeRefreshLayout.setRefreshing(false);
+                        Log.d("HABITS_RESPONSE", response);
+
                         try {
                             JSONArray jsonArray = new JSONArray(response);
-                            habitList.clear(); // Limpiamos antes de agregar
+                            habitList.clear();
 
                             for (int i = 0; i < jsonArray.length(); i++) {
                                 JSONObject obj = jsonArray.getJSONObject(i);
@@ -101,6 +157,7 @@ public class Habits extends AppCompatActivity {
                             habitsAdapter.notifyDataSetChanged();
 
                         } catch (JSONException e) {
+                            Log.e("JSON_ERROR", "Error al parsear hábitos: " + e.getMessage());
                             e.printStackTrace();
                         }
                     }
@@ -108,7 +165,8 @@ public class Habits extends AppCompatActivity {
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
-                        swipeRefreshLayout.setRefreshing(false); // Ocultar animación también en error
+                        swipeRefreshLayout.setRefreshing(false);
+                        Log.e("VOLLEY_ERROR", "Error en la solicitud: " + error.getMessage());
                         error.printStackTrace();
                     }
                 }
@@ -117,7 +175,7 @@ public class Habits extends AppCompatActivity {
             protected Map<String, String> getParams() throws AuthFailureError {
                 Map<String, String> params = new HashMap<>();
                 params.put("action", "list");
-                params.put("userId", String.valueOf(userId)); // ⬅️ Manda el userId también
+                params.put("userId", String.valueOf(userId));
                 return params;
             }
         };
@@ -128,6 +186,6 @@ public class Habits extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        cargarHabitosServidor(); // Cada vez que regresas a esta pantalla, recarga hábitos automáticamente
+        cargarHabitosServidor();
     }
 }

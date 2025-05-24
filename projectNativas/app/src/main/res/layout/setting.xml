@@ -8,18 +8,18 @@
     android:layout_height="match_parent"
     tools:openDrawer="start">
 
-    <!-- Contenedor principal -->
+    <!-- CONTENIDO PRINCIPAL -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
         android:background="@android:color/white">
 
-        <!-- Toolbar -->
+        <!-- TOOLBAR -->
         <androidx.appcompat.widget.Toolbar
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
-            android:layout_height="?attr/actionBarSize"
+            android:layout_height="120dp"
             android:background="@color/nav"
             android:elevation="4dp"
             android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
@@ -29,21 +29,21 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
 
-                <!-- Título centrado -->
+                <!-- TÍTULO -->
                 <TextView
                     android:id="@+id/toolbar_title"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Configuración"
                     android:textColor="@android:color/black"
-                    android:textSize="28sp"
+                    android:textSize="35sp"
                     android:textStyle="bold"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
                     app:layout_constraintBottom_toBottomOf="parent"/>
 
-                <!-- Menú hamburguesa -->
+                <!-- BOTÓN DE MENÚ -->
                 <ImageButton
                     android:id="@+id/btn_menu"
                     android:layout_width="64dp"
@@ -53,14 +53,14 @@
                     android:contentDescription="Menú"
                     android:scaleType="centerInside"
                     android:src="@drawable/ic_menu"
+                    app:layout_constraintTop_toTopOf="parent"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:tint="@color/black" />
+                    app:tint="@color/black"/>
             </androidx.constraintlayout.widget.ConstraintLayout>
         </androidx.appcompat.widget.Toolbar>
 
-        <!-- ScrollView para que la configuración se expanda -->
+        <!-- CONTENIDO -->
         <ScrollView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -68,88 +68,32 @@
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:orientation="vertical"
-                android:padding="16dp">
+                android:padding="32dp"
+                android:gravity="center_horizontal">
 
-                <!-- Sección de Configuración -->
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    android:layout_weight="1">  <!-- Este peso ayuda a distribuir mejor -->
+                <!-- BOTÓN CERRAR SESIÓN -->
+                <Button
+                    android:id="@+id/btn_cerrar_sesion"
+                    android:layout_width="250dp"
+                    android:layout_height="70dp"
+                    android:text="Cerrar sesión"
+                    android:textAllCaps="false"
+                    android:textColor="@android:color/white"
+                    android:backgroundTint="@color/red"
+                    android:textSize="20sp"
+                    android:layout_marginTop="40dp"
+                    android:elevation="4dp"/>
 
-                    <!-- Recordatorio de notificaciones -->
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="horizontal"
-                        android:gravity="center_vertical"
-                        android:paddingBottom="16dp">
-
-                        <TextView
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:text="Recordatorio de notificaciones"
-                            android:textColor="@android:color/black"
-                            android:textSize="20sp"/>
-
-                        <Spinner
-                            android:id="@+id/spinner_notificaciones"
-                            android:layout_width="150dp"
-                            android:layout_height="48dp"
-                            android:background="@drawable/set_spinn_bg"
-                            android:padding="8dp"
-                            android:gravity="center"/>
-
-                    </LinearLayout>
-
-                    <View
-                        android:layout_width="match_parent"
-                        android:layout_height="2dp"
-                        android:background="@android:color/darker_gray"/>
-
-                    <!-- Tema de fondo -->
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="horizontal"
-                        android:gravity="center_vertical"
-                        android:paddingTop="16dp"
-                        android:paddingBottom="16dp">
-
-                        <TextView
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:text="Tema de fondo"
-                            android:textColor="@android:color/black"
-                            android:textSize="20sp"/>
-
-                        <Spinner
-                            android:id="@+id/spinner_tema"
-                            android:layout_width="150dp"
-                            android:layout_height="48dp"
-                            android:background="@drawable/set_spinn_bg_white"
-                            android:padding="8dp"
-                            android:gravity="center"/>
-
-                    </LinearLayout>
-                    <View
-                        android:layout_width="match_parent"
-                        android:layout_height="2dp"
-                        android:background="@android:color/darker_gray"/>
-                </LinearLayout>
-
-                <!-- Separador -->
                 <View
                     android:layout_width="match_parent"
                     android:layout_height="2dp"
                     android:background="@android:color/darker_gray"
-                    android:layout_marginTop="8dp"/>
+                    android:layout_marginTop="40dp"
+                    android:layout_marginBottom="8dp"/>
 
-                <!-- Sección "Acerca de la App" -->
+                <!-- SECCIÓN "Acerca de la App" -->
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -172,7 +116,6 @@
                         android:background="@android:color/darker_gray"
                         android:layout_marginTop="8dp"/>
 
-                    <!-- Información centrada -->
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -180,7 +123,7 @@
                         android:gravity="center"
                         android:paddingTop="16dp">
 
-                        <!-- Columna de Versión -->
+                        <!-- VERSIÓN -->
                         <LinearLayout
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
@@ -194,19 +137,17 @@
                                 android:text="Versión"
                                 android:textColor="@android:color/black"
                                 android:textSize="18sp"
-                                android:textStyle="bold"
-                                android:gravity="center"/>
+                                android:textStyle="bold"/>
 
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text="1.0.1"
                                 android:textColor="@android:color/black"
-                                android:textSize="18sp"
-                                android:gravity="center"/>
+                                android:textSize="18sp"/>
                         </LinearLayout>
 
-                        <!-- Columna de Desarrolladores -->
+                        <!-- DESARROLLADOR -->
                         <LinearLayout
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
@@ -220,21 +161,28 @@
                                 android:text="Desarrolladores"
                                 android:textColor="@android:color/black"
                                 android:textSize="18sp"
-                                android:textStyle="bold"
-                                android:gravity="center"/>
+                                android:textStyle="bold"/>
 
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text="Juan Celis"
                                 android:textColor="@android:color/black"
-                                android:textSize="18sp"
-                                android:gravity="center"/>
+                                android:textSize="18sp"/>
                         </LinearLayout>
                     </LinearLayout>
                 </LinearLayout>
             </LinearLayout>
         </ScrollView>
-
     </LinearLayout>
+
+    <!-- MENÚ LATERAL -->
+    <com.google.android.material.navigation.NavigationView
+        android:id="@+id/nav_view"
+        android:layout_width="250dp"
+        android:layout_height="match_parent"
+        android:layout_gravity="start"
+        android:background="@color/nav"
+        app:menu="@menu/drawer_menu"
+        app:itemTextAppearance="@style/CustomNavigationViewText"/>
 </androidx.drawerlayout.widget.DrawerLayout>

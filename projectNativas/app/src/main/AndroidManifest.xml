@@ -28,6 +28,8 @@
         <activity android:name=".Habits" />
         <activity android:name=".CrearHabitoActivity" />
         <activity android:name=".EditHabitActivity" />
+        <activity android:name=".Statistics" />
+        <activity android:name=".Settings" />
     </application>
 
 </manifest>

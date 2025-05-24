@@ -17,6 +17,8 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import org.json.JSONArray;
+import org.json.JSONObject;
 
 /**
  *
@@ -168,39 +170,68 @@ public class HabitController extends HttpServlet {
                 PrintWriter out = response.getWriter();
 
                 try {
-                    // Leer el userId que mandó Android
                     int userId = Integer.parseInt(request.getParameter("userId"));
-
                     List<Habits> habitos = habitsJPA.findHabitsEntities();
-                    StringBuilder json = new StringBuilder();
-                    json.append("[");
 
-                    boolean first = true; // Para controlar comas
+                    JSONArray jsonArray = new JSONArray();
 
                     for (Habits h : habitos) {
-                        if (h.getUsuario().getId() == userId) { // Solo incluir hábitos del usuario
-                            if (!first) {
-                                json.append(",");
-                            }
-                            json.append("{")
-                                    .append("\"id\":").append(h.getId()).append(",")
-                                    .append("\"habitoNombre\":\"").append(h.getHabitoNombre()).append("\",")
-                                    .append("\"frecuencia\":\"").append(h.getFrecuencia()).append("\",")
-                                    .append("\"recordatorio\":\"").append(h.getRecordatorio()).append("\",")
-                                    .append("\"estado\":").append(h.isEstado()).append(",")
-                                    .append("\"imagenUrl\":\"").append(h.getImagenUrl()).append("\"")
-                                    .append("}");
-                            first = false;
+                        if (h.getUsuario().getId() == userId) {
+                            JSONObject habitJson = new JSONObject();
+                            habitJson.put("id", h.getId());
+                            habitJson.put("habitoNombre", h.getHabitoNombre());
+                            habitJson.put("frecuencia", h.getFrecuencia());
+                            habitJson.put("recordatorio", h.getRecordatorio());
+                            habitJson.put("estado", h.isEstado());
+                            habitJson.put("imagenUrl", h.getImagenUrl());
+
+                            jsonArray.put(habitJson);
                         }
                     }
 
-                    json.append("]");
-                    out.print(json.toString());
+                    out.print(jsonArray.toString());
+
+                    System.out.println("Habitos enviados: " + jsonArray.toString());
 
                 } catch (Exception e) {
                     response.getWriter().write("Error: " + e.getMessage());
                 }
                 break;
+
+            case "getStats":
+                response.setContentType("application/json");
+                response.setCharacterEncoding("UTF-8");
+
+                try {
+                    int userId = Integer.parseInt(request.getParameter("userId"));
+                    List<Habits> habitos = habitsJPA.findHabitsEntities();
+
+                    int completados = 0;
+                    int noCompletados = 0;
+
+                    for (Habits h : habitos) {
+                        if (h.getUsuario().getId() == userId) {
+                            if (h.isEstado()) {
+                                completados++;
+                            } else {
+                                noCompletados++;
+                            }
+                        }
+                    }
+
+                    JSONObject jsonStats = new JSONObject();
+                    jsonStats.put("completados", completados);
+                    jsonStats.put("noCompletados", noCompletados);
+
+                    PrintWriter outStats = response.getWriter();
+                    outStats.print(jsonStats.toString());
+                    outStats.flush();
+                } catch (Exception e) {
+                    response.setContentType("text/plain");
+                    response.getWriter().write("Error: " + e.getMessage());
+                }
+                break;
+
             default:
                 throw new AssertionError();
         }

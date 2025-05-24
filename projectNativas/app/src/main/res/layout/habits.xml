@@ -7,7 +7,9 @@
     android:layout_height="match_parent"
     tools:openDrawer="start">
 
+    <!-- ✅ Contenido principal -->
     <LinearLayout
+        android:id="@+id/content_main"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
@@ -57,7 +59,7 @@
 
         </androidx.appcompat.widget.Toolbar>
 
-        <!-- ⬇️ NUEVO: Contenedor de lista con SwipeRefreshLayout -->
+        <!-- Lista con SwipeRefreshLayout -->
         <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
             android:id="@+id/swipeRefreshLayout"
             android:layout_width="match_parent"
@@ -72,13 +74,7 @@
                 android:clipToPadding="false" />
         </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
-    </LinearLayout>
-
-    <!-- FAB Botón -->
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
-
+        <!-- ✅ FAB debe ir dentro del contenido principal, no flotando encima de todo -->
         <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:id="@+id/fab_add"
             android:layout_width="wrap_content"
@@ -87,9 +83,17 @@
             android:src="@drawable/ic_add"
             android:contentDescription="Agregar nuevo hábito"
             app:backgroundTint="@color/nav"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            android:layout_margin="30dp" />
-    </androidx.constraintlayout.widget.ConstraintLayout>
+            android:layout_gravity="end|bottom"
+            android:layout_margin="30dp"/>
+    </LinearLayout>
 
+    <!-- ✅ Menu lateral correctamente posicionado -->
+    <com.google.android.material.navigation.NavigationView
+        android:id="@+id/nav_view"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_gravity="start"
+        android:background="@color/nav"
+        app:menu="@menu/drawer_menu"
+        app:itemTextAppearance="@style/CustomNavigationViewText"/>
 </androidx.drawerlayout.widget.DrawerLayout>
